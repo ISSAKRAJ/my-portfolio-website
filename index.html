@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravi Issak Raj | Software Developer & Content Creator</title>
+    <!-- Modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #020617; /* Deepest blue/black */
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --text-color: #f8fafc;
+            --muted-text: #94a3b8;
+            --accent-glow: #6366f1; /* Indigo */
+            --accent-secondary: #a855f7; /* Purple */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- AMBIENT BACKGROUND GLOWS --- */
+        .glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-1 { top: -100px; left: -100px; }
+        .glow-2 { bottom: -100px; right: -100px; background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            z-index: 1000;
+            padding: 15px 40px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--accent-glow); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted-text);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--text-color); }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 220px 0 100px;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-content { flex: 1; }
+
+        .hero-image {
+            width: 320px;
+            height: 320px;
+            flex-shrink: 0;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .hero-image:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-glow);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-glow);
+            padding: 5px 15px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+            line-height: 1;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, var(--accent-glow), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- SKILLS --- */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .skill-badge {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        .skill-badge:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        /* --- PROJECTS --- */
+        section { padding: 100px 0; }
+        .section-header { margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        .section-header p { color: var(--muted-text); margin-top: 0.5rem; }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-glow);
+            background: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .project-card .tag {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--accent-secondary);
+            margin-bottom: 1rem;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .project-card h3 { margin-bottom: 1rem; font-size: 1.5rem; letter-spacing: -0.5px; }
+        .project-card p { color: var(--muted-text); font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .project-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- ABOUT / EDUCATION --- */
+        .about-box {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.4));
+            border: 1px solid var(--border-color);
+            border-radius: 32px;
+            padding: 3.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .edu-item h4 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .edu-stats { display: flex; gap: 2rem; margin: 1.5rem 0; }
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .stat-box span { display: block; font-size: 0.7rem; color: var(--muted-text); text-transform: uppercase; }
+        .stat-box b { font-size: 1.2rem; color: var(--accent-glow); }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 100px 0 60px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            opacity: 0.6;
+        }
+
+        .social-links a:hover { opacity: 1; color: var(--accent-glow); transform: translateY(-3px); }
+
+        .copyright { color: var(--muted-text); font-size: 0.8rem; margin-top: 2rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 180px; }
+            .hero-image { width: 250px; height: 250px; border-radius: 30px; }
+            .hero p { margin: 0 auto 2.5rem; }
+            .skills-container { justify-content: center; }
+            .nav-links { display: none; }
+            .edu-stats { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">ISSAK <span>RAJ</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">Education</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero container">
+        <div class="hero-content">
+            <span class="badge">Open for Internships</span>
+            <h1>Architecting <span>Simple</span> Software Solutions.</h1>
+            <p>I'm a Developer at heart and a <b>Content Creator at TechXTech</b> by passion. I solve complex problems with clean code and explain technology to the world.</p>
+            
+            <div class="skills-container">
+                <span class="skill-badge">C++ Expert</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">DSA</span>
+                <span class="skill-badge">MERN</span>
+                <span class="skill-badge">YouTube</span>
+                <span class="skill-badge">Git</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="WhatsApp Image 2025-10-20 at 22.31.16_dc305e1a.jpg" alt="Ravi Issak Raj" onerror="this.src='https://via.placeholder.com/320?text=Profile+Photo'">
+        </div>
+    </header>
+
+    <section id="projects" class="container">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <p>A collection of my recent engineering work and systems design.</p>
+        </div>
+        <div class="project-grid">
+            <div class="project-card">
+                <span class="tag">System Design</span>
+                <h3>Student Data Management</h3>
+                <p>Robust C++ application utilizing OOP and file handling for persistent storage. Optimized for memory efficiency and high-speed data retrieval.</p>
+                <a href="https://github.com/ISSAKRAJ" class="project-link">CODEBASE <small>→</small></a>
+            </div>
+
+            <div class="project-card">
+                <span class="tag">Automation</span>
+                <h3>Z.A.C - AI Assistant</h3>
+                <p>Modular Python-based personal assistant built with multithreading. Automates complex routine tasks and desktop workflows seamlessly.</p>
+                <a href="https://github.com/ISSAKRAJ" class="project-link">CODEBASE <small>→</small></a>
+            </div>
+
+            <div class="project-card">
+                <span class="tag">NLP</span>
+                <h3>Scalable Chatbot</h3>
+                <p>Rule-based chatbot with advanced input parsing and structured conversational logic. Designed for predictable user interactions.</p>
+                <a href="https://github.com/ISSAKRAJ" class="project-link">CODEBASE <small>→</small></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="about-box">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>Academic Journey</h2>
+            </div>
+            <div class="edu-item">
+                <h4>B.Tech in Computer Science & Engineering</h4>
+                <p style="color: var(--muted-text);">Pragati Engineering College • 2024 — 2028</p>
+                
+                <div class="edu-stats">
+                    <div class="stat-box">
+                        <span>Current Standing</span>
+                        <b>8.93 CGPA</b>
+                    </div>
+                    <div class="stat-box">
+                        <span>Relevant Courses</span>
+                        <b>DSA, OOP, DBMS, OS</b>
+                </div>
+
+                <ul style="list-style: none; color: var(--muted-text); font-size: 0.95rem;">
+                    <li style="margin-bottom: 0.8rem;">
+                        ⚡ <b>TechXTech Creator</b>: Simplifying tech for the YouTube community.</li>
+                    <li style="margin-bottom: 0.8rem;">
+                        ⚡ <b>HackRx 6.0</b>: Collaborated in high-pressure AI development.</li>
+                    <li>⚡ <b>Forage Intern</b>: TATA GenAI Powered Data Analytics.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/issak-raj-7772aa322">LinkedIn</a>
+                <a href="https://github.com/ISSAKRAJ">GitHub</a>
+                <a href="https://leetcode.com/u/ISSAK_RAJ123/">LeetCode</a>
+                <a href="https://www.hackerrank.com/profile/issakraj">HackerRank</a>
+                <a href="https://www.youtube.com/@TechXTech">YouTube</a>
+                <a href="mailto:issakrajraj@gmail.com">Email</a>
+            </div>
+            <p style="color: var(--accent-glow); font-weight: 700; font-size: 1.2rem;">RAVI ISSAK RAJ</p>
+            <p class="copyright">Designed with precision &copy; 2026. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
